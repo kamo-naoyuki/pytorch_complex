@@ -15,6 +15,7 @@ install:
 script:
     - conda activate
     - python setup.py test
+    - pycodestyle --version
     - pycodestyle torch_complex tests
     - flake8 torch_complex tests
 after_success:
