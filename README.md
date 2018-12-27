@@ -63,7 +63,7 @@ x.conj()
 x.inverse() # Batch-inverse
 ```
 
-All is implemented with combinations of python-function of `RealTensor`, thus the computing speed　is not good enough.
+Allare implemented with combinations of python-function of `RealTensor`, thus the computing speed　is not good enough.
 
 
 ### Functional
