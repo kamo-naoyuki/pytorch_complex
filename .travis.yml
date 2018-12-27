@@ -5,12 +5,8 @@ python:
     - "3.6"
 
 install:
-    - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-    - bash miniconda.sh -b -p ./miniconda
-    - source miniconda/etc/profile.d/conda.sh
-    - conda activate
-    - conda update -y conda
-    - conda install -y -c pytorch pytorch
+    - python --version
+    - pip install torch
     - pip install -e .
     - pip install --upgrade pycodestyle flake8 codecov
     - pycodestyle --version
