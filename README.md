@@ -15,7 +15,7 @@ I think PyTorch is greatest DNN Python library now, except that it doesn't suppo
 
 https://github.com/pytorch/pytorch/issues/755
 
-I'm looking forward to the completion, but I need `ComplexTensor` for some DNN experiments now and I don't want to use any other DNN tools.
+I'm looking forward to the completion, but I need `ComplexTensor` for some DNN experiments for now and I don't want to use any other DNN tools.
  I created this cheap module for the workaround of this problem.
 
 I'll throw away this project as soon as  `ComplexTensor` is completely supported!
@@ -70,7 +70,7 @@ F.einsum('bij,bjk,bkl->bil', [x, x, x])
 ```
 
 ### For DNN
-Almost all method that `torch.Tensor` has is implemented. If that doesn't exist, it it easy to implement.
+Almost all methods that `torch.Tensor` has are implemented. 
 
 ```python
 (x + x).sum().backward()
