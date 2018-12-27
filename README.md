@@ -15,7 +15,7 @@ I think PyTorch is greatest DNN Python library now, except that it doesn't suppo
 
 https://github.com/pytorch/pytorch/issues/755
 
-I'm looking forward to the completion, but I need `ComplexTensor` for some DNN experiments for now and I don't want to use any other DNN tools.
+I'm looking forward to the completion, but I need `ComplexTensor` for now and I don't want to use any other DNN tools.
  I created this cheap module for the workaround of this problem.
 
 I'll throw away this project as soon as  `ComplexTensor` is completely supported!
