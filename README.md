@@ -16,15 +16,13 @@ class ComplexTensor:
         self.imag = torch.Tensor(...)
 ```
 
-### Why need?
+### Why?
 PyTorch is great DNN Python library, except that it doesn't support `ComplexTensor` in Python level.
 
 https://github.com/pytorch/pytorch/issues/755
 
 I'm looking forward to the completion, but I need `ComplexTensor` for now.
- I created this cheap module for the workaround of this problem.
-
-I'll throw away this project as soon as  `ComplexTensor` is completely supported!
+ I created this cheap module for the temporal replacement of it. Thus, I'll throw away this project as soon as  `ComplexTensor` is completely supported!
 
 ## Requirements
 
