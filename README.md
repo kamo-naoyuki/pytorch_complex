@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/kamo-naoyuki/pytorch_complex.svg?branch=master)](https://travis-ci.org/kamo-naoyuki/pytorch_complex)
 [![codecov](https://codecov.io/gh/kamo-naoyuki/pytorch_complex/branch/master/graph/badge.svg)](https://codecov.io/gh/kamo-naoyuki/pytorch_complex)
 
-Cheap python class for representing PyTorch-ComplexTensor
+A fugacious python class for PyTorch-ComplexTensor
 
 
 ## What is this?
@@ -17,11 +17,11 @@ class ComplexTensor:
 ```
 
 ### Why need?
-I think PyTorch is greatest DNN Python library now, except that it doesn't support `ComplexTensor` in Python level.
+PyTorch is great DNN Python library, except that it doesn't support `ComplexTensor` in Python level.
 
 https://github.com/pytorch/pytorch/issues/755
 
-I'm looking forward to the completion, but I need `ComplexTensor` for now and I don't want to use any other DNN tools.
+I'm looking forward to the completion, but I need `ComplexTensor` for now.
  I created this cheap module for the workaround of this problem.
 
 I'll throw away this project as soon as  `ComplexTensor` is completely supported!
