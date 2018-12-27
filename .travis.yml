@@ -9,7 +9,8 @@ install:
     - bash miniconda.sh -b -p ./miniconda
     - source miniconda/etc/profile.d/conda.sh
     - conda update conda
-    - conda install -c pytorch pytorch
+    - conda install -y python=3.6
+    - conda install -y -c pytorch pytorch
     - pip install -e .
     - pip install pycodestyle flake8 codecov
 script:
