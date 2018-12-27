@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(name='torch_complex',
       version='0.0.0',
-      description='Cheap python class for representing PyTorch-ComplexTensor',
+      description='A fugacious python class for PyTorch-ComplexTensor',
       author='Naoyuki Kamo',
       author_email='naoyuki.kamo829@gmail.com',
       url='https://github.com/kamo-naoyuki/torch_complex',
