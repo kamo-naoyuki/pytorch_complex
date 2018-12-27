@@ -1,5 +1,12 @@
 # pytorch_complex
 
+[![Build Status](https://travis-ci.com/kamo-naoyuki/pytorch_complex.svg?branch=master)](https://travis-ci.com/kamo-naoyuki/pytorch_complex)
+[![codecov](https://codecov.io/gh/kamo-naoyuki/pytorch_complex/branch/master/graph/badge.svg)](https://codecov.io/gh/kamo-naoyuki/pytorch_complex)
+
+
+
+
+
 ## What is this?
 A Python class to perform `ComplexTensor` for PyTorch: Nothing except for the following,
 
