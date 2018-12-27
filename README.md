@@ -79,5 +79,7 @@ F.einsum('bij,bjk,bkl->bil', [x, x, x])
 Almost all methods that `torch.Tensor` has are implemented. 
 
 ```python
+x.cuda()
+x.cpu()
 (x + x).sum().backward()
 ```
