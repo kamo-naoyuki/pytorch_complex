@@ -11,7 +11,6 @@ install:
     - pip install --upgrade pycodestyle flake8 codecov
     - pycodestyle --version
 script:
-    - conda activate
     - python setup.py test
     - pycodestyle torch_complex tests
     - flake8 torch_complex tests
