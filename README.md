@@ -3,8 +3,7 @@
 [![Build Status](https://travis-ci.com/kamo-naoyuki/pytorch_complex.svg?branch=master)](https://travis-ci.com/kamo-naoyuki/pytorch_complex)
 [![codecov](https://codecov.io/gh/kamo-naoyuki/pytorch_complex/branch/master/graph/badge.svg)](https://codecov.io/gh/kamo-naoyuki/pytorch_complex)
 
-
-
+Cheap python class for representing PyTorch-ComplexTensor
 
 
 ## What is this?
@@ -63,7 +62,7 @@ x.conj()
 x.inverse() # Batch-inverse
 ```
 
-Allare implemented with combinations of python-function of `RealTensor`, thus the computing speed　is not good enough.
+All are implemented with combinations of python-function of `RealTensor`, thus the computing speed　is not good enough.
 
 
 ### Functional
