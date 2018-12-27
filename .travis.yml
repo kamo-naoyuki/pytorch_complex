@@ -9,11 +9,11 @@ install:
     - bash miniconda.sh -b -p ./miniconda
     - source miniconda/etc/profile.d/conda.sh
     - conda update -y conda
-    - conda install -y python=3.6
     - conda install -y -c pytorch pytorch
     - pip install -e .
     - pip install pycodestyle flake8 codecov
 script:
+    - conda activate
     - python setup.py test
     - pycodestyle torch_complex tests
     - flake8 torch_complex tests
