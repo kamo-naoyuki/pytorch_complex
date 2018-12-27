@@ -2,8 +2,6 @@ sudo: false
 
 language: python
 python:
-    - "2.7"
-    - "3.5"
     - "3.6"
 
 install:
@@ -11,7 +9,7 @@ install:
     - pip install pycodestyle flake8 codecov
 script:
     - python setup.py test
-    - pycodestyle kaldiio tests
-    - flake8 kaldiio tests
+    - pycodestyle torch_complex tests
+    - flake8 torch_complex tests
 after_success:
     - codecov
