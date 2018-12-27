@@ -8,14 +8,15 @@ install:
     - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
     - bash miniconda.sh -b -p ./miniconda
     - source miniconda/etc/profile.d/conda.sh
+    - conda activate
     - conda update -y conda
     - conda install -y -c pytorch pytorch
     - pip install -e .
-    - pip install pycodestyle flake8 codecov
+    - pip install --upgrade pycodestyle flake8 codecov
+    - pycodestyle --version
 script:
     - conda activate
     - python setup.py test
-    - pycodestyle --version
     - pycodestyle torch_complex tests
     - flake8 torch_complex tests
 after_success:
