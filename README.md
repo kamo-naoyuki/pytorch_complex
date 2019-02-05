@@ -7,7 +7,7 @@ A temporal python class for PyTorch-ComplexTensor
 
 
 ## What is this?
-A Python class to perform `ComplexTensor` for PyTorch: Nothing except for the following,
+A Python class to perform as `ComplexTensor` in PyTorch: Nothing except for the following,
 
 ```python
 class ComplexTensor: 
