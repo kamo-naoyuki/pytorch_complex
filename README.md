@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/kamo-naoyuki/pytorch_complex.svg?branch=master)](https://travis-ci.org/kamo-naoyuki/pytorch_complex)
 [![codecov](https://codecov.io/gh/kamo-naoyuki/pytorch_complex/branch/master/graph/badge.svg)](https://codecov.io/gh/kamo-naoyuki/pytorch_complex)
 
-A fugacious python class for PyTorch-ComplexTensor
+A temporal python class for PyTorch-ComplexTensor
 
 
 ## What is this?
