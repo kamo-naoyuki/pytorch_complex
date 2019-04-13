@@ -437,7 +437,7 @@ class ComplexTensor:
         return ComplexTensor(real, imag)
 
     def new_full(self, size, fill_value, dtype=None, device=None,
-                 requires_grad=False)-> 'ComplexTensor':
+                 requires_grad=False) -> 'ComplexTensor':
         if isinstance(fill_value, complex):
             real_value = fill_value.real
             imag_value = fill_value.imag
@@ -458,7 +458,7 @@ class ComplexTensor:
         return ComplexTensor(real, imag)
 
     def new_tensor(self, data, dtype=None, device=None,
-                   requires_grad=False)-> 'ComplexTensor':
+                   requires_grad=False) -> 'ComplexTensor':
         if isinstance(data, ComplexTensor):
             real = data.real
             imag = data.imag
