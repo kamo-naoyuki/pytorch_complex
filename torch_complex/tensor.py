@@ -377,7 +377,7 @@ class ComplexTensor:
         # utilized "Section 4.3" only in case of "t=1"
         o_real = (a.real + torch.matmul(torch.matmul(a.imag, a.real.inverse()),
                                         a.imag)).inverse()
-        o_imag = -torch.matmul(o_real, torch.(a.imag, a.real.inverse()))
+        o_imag = -torch.matmul(o_real, torch.matmul(a.imag, a.real.inverse()))
         o = ComplexTensor(o_real, o_imag)
         return o.view(*in_size)
 
