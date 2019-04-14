@@ -366,7 +366,7 @@ class ComplexTensor:
         # see "The Matrix Cookbook" (http://www2.imm.dtu.dk/pubdb/p.php?3274)
         # "Section 4.3"
         for i in range(ntry):
-            t = i * 0.1 
+            t = i * 0.1
 
             e = a.real + t * a.imag
             f = a.imag - t * a.real
@@ -379,13 +379,13 @@ class ComplexTensor:
                     raise
                 continue
 
-            if t != 0.: 
+            if t != 0.:
                 eye = torch.eye(a.real.size(-1), dtype=a.real.dtype,
                                 device=a.real.device)[None]
-                o_real = torch.matmul(z, (eye - t * x)) 
-                o_imag = -torch.matmul(z, (t * eye + x)) 
+                o_real = torch.matmul(z, (eye - t * x))
+                o_imag = -torch.matmul(z, (t * eye + x))
             else:
-                o_real = z 
+                o_real = z
                 o_imag = -torch.matmul(z, x)
 
             o = ComplexTensor(o_real, o_imag)
