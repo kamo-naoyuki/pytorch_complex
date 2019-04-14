@@ -372,8 +372,7 @@ class ComplexTensor:
             f = a.imag - t * a.real
 
             try:
-                e_inverse = e.inverse()
-                x = torch.matmul(f, e_inverse)
+                x = torch.matmul(f, e.inverse())
                 z = (e + torch.matmul(x, f)).inverse()
             except Exception:
                 if i == ntry - 1:
