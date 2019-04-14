@@ -200,7 +200,7 @@ class ComplexTensor:
 
     def __repr__(self) -> str:
         return 'ComplexTensor(\nReal:\n' \
-               + repr(self.real) + '\nImag;\n' + repr(self.imag) + '\n)'
+               + repr(self.real) + '\nImag:\n' + repr(self.imag) + '\n)'
 
     def __abs__(self) -> torch.Tensor:
         return (self.real * self.real + self.imag * self.imag).sqrt()
