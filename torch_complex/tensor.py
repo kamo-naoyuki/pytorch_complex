@@ -359,27 +359,38 @@ class ComplexTensor:
         return ComplexTensor(self.real.index_select(dim, index),
                              self.imag.index_select(dim, index))
 
-    def inverse(self):
-        coef = 1e-10
+    def inverse(self, ntry=5):
         # m x n x n
         in_size = self.size()
         a = self.view(-1, self.size(-1), self.size(-1))
-
-        # n x n
-        E = coef * torch.eye(a.real.size(-1),
-                             dtype=a.real.dtype,
-                             device=a.real.device)
-
-        # m x n x n
-        a.real = a.real + E.unsqueeze(0)
-
         # see "The Matrix Cookbook" (http://www2.imm.dtu.dk/pubdb/p.php?3274)
-        # utilized "Section 4.3" only in case of "t=1"
-        o_real = (a.real + torch.matmul(torch.matmul(a.imag, a.real.inverse()),
-                                        a.imag)).inverse()
-        o_imag = -torch.matmul(o_real, torch.matmul(a.imag, a.real.inverse()))
-        o = ComplexTensor(o_real, o_imag)
-        return o.view(*in_size)
+        # "Section 4.3"
+        for i in range(ntry):
+            t = i * 0.1 
+
+            e = a.real + t * a.imag
+            f = a.imag - t * a.real
+
+            try:
+                e_inverse = e.inverse()
+                x = torch.matmul(f, e_inverse)
+                z = (e + torch.matmul(x, f)).inverse()
+            except Exception:
+                if i == ntry - 1:
+                    raise
+                continue
+
+            if t != 0.: 
+                eye = torch.eye(a.real.size(-1), dtype=a.real.dtype,
+                                device=a.real.device)[None]
+                o_real = torch.matmul(z, (eye - t * x)) 
+                o_imag = -torch.matmul(z, (t * eye + x)) 
+            else:
+                o_real = z 
+                o_imag = -torch.matmul(z, x)
+
+            o = ComplexTensor(o_real, o_imag)
+            return o.view(*in_size)
 
     def item(self) -> numbers.Number:
         return self.real.item() + 1j * self.imag.item()
