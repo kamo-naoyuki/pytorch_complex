@@ -412,9 +412,9 @@ class ComplexTensor:
             self.imag.masked_fill_(mask, 0)
         return self
 
-    def mean(self, dim=None, keepdim=False) -> 'ComplexTensor':
-        return ComplexTensor(self.real.mean(dim, keepdim),
-                             self.imag.mean(dim, keepdim),)
+    def mean(self, *args, **kwargs) -> 'ComplexTensor':
+        return ComplexTensor(self.real.mean(*args, **kwargs),
+                             self.imag.mean(*args, **kwargs))
 
     def neg(self) -> 'ComplexTensor':
         return ComplexTensor(-self.real, -self.imag)
@@ -552,9 +552,9 @@ class ComplexTensor:
         return ComplexTensor(self.real.squeeze(dim),
                              self.imag.squeeze(dim))
 
-    def sum(self, dim=None, keepdim=False) -> 'ComplexTensor':
-        return ComplexTensor(self.real.sum(dim, keepdim),
-                             self.imag.sum(dim, keepdim),)
+    def sum(self, *args, **kwargs) -> 'ComplexTensor':
+        return ComplexTensor(self.real.sum(*args, **kwargs),
+                             self.imag.sum(*args, **kwargs),)
 
     def take(self, indices) -> 'ComplexTensor':
         return ComplexTensor(self.real.take(indices), self.imag.take(indices))
