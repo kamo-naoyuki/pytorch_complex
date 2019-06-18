@@ -67,3 +67,11 @@ def test_pow(num):
     y = t1 ** num
     y = y.numpy()
     numpy.testing.assert_allclose(x, y)
+
+def test_sum():
+    n1 = _get_complex_array(10, 10)
+    t1 = ComplexTensor(n1.copy())
+    x = n1.sum()
+    y = t1.sum()
+    y = y.numpy()
+    numpy.testing.assert_allclose(x, y)
