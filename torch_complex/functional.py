@@ -8,7 +8,7 @@ from torch.nn import functional as F
 
 from torch_complex.tensor import ComplexTensor
 
-is_torch_1_2_plus = LooseVersion(torch.__version__) >= LooseVersion('1.2')
+is_torch_1_2_plus = 
 
 
 def _fcomplex(func, nthargs=0):
@@ -126,8 +126,11 @@ def signal_frame(signal: torch.Tensor,
 
 
 def trace(a: ComplexTensor) -> ComplexTensor:
-    datatype = torch.bool if is_torch_1_2_plus else torch.uint8
+    if LooseVersion(torch.__version__) >= LooseVersion('1.3')
+        datatype = torch.bool if is_torch_1_2_plus else torch.uint8
     E = torch.eye(a.real.size(-1), dtype=datatype).expand(*a.size())
+    if LooseVersion(torch.__version__) >= LooseVersion('1.1')
+        E = E.type(torch.bool)
     return a[E].view(*a.size()[:-1]).sum(-1)
 
 
