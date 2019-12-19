@@ -8,8 +8,6 @@ from torch.nn import functional as F
 
 from torch_complex.tensor import ComplexTensor
 
-is_torch_1_2_plus = 
-
 
 def _fcomplex(func, nthargs=0):
     @functools.wraps(func)
