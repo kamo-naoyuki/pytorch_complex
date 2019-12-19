@@ -28,3 +28,10 @@ def test_operation(nop, top):
     y = top([t1, t2, t3])
     y = y.numpy()
     numpy.testing.assert_allclose(x, y)
+
+
+def test_trace():
+    t = _get_complex_array(10, 10)
+    x = numpy.trace(t.numpy())
+    y = t.trace().numpy()
+    numpy.testing.assert_allclose(x, y)
