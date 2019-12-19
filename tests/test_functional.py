@@ -33,5 +33,5 @@ def test_operation(nop, top):
 def test_trace():
     t = ComplexTensor(_get_complex_array(10, 10))
     x = numpy.trace(t.numpy())
-    y = t.trace().numpy()
+    y = F.trace(t).numpy()
     numpy.testing.assert_allclose(x, y)
