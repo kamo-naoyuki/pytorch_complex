@@ -124,10 +124,10 @@ def signal_frame(signal: torch.Tensor,
 
 
 def trace(a: ComplexTensor) -> ComplexTensor:
-    if LooseVersion(torch.__version__) >= LooseVersion('1.3')
+    if LooseVersion(torch.__version__) >= LooseVersion('1.3'):
         datatype = torch.bool if is_torch_1_2_plus else torch.uint8
     E = torch.eye(a.real.size(-1), dtype=datatype).expand(*a.size())
-    if LooseVersion(torch.__version__) >= LooseVersion('1.1')
+    if LooseVersion(torch.__version__) >= LooseVersion('1.1'):
         E = E.type(torch.bool)
     return a[E].view(*a.size()[:-1]).sum(-1)
 
