@@ -3,7 +3,7 @@ import os
 from setuptools import find_packages
 from setuptools import setup
 
-dirname = os.path.dirname(__file__)↲
+dirname = os.path.dirname(__file__)
 setup(name='torch_complex',
       version='0.0.3',
       description='A fugacious python class for PyTorch-ComplexTensor',
