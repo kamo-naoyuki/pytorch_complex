@@ -16,7 +16,7 @@ setup(name='torch_complex',
       packages=find_packages(include=['torch_complex']),
       install_requires=['numpy'],
       setup_requires=['pytest-runner'],
-      tests_require=['pytest', 'pytest-cov']
+      tests_require=['pytest', 'pytest-cov'],
       classifiers=[
           'Programming Language :: Python',
           'Programming Language :: Python :: 3',
