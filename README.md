@@ -34,7 +34,7 @@ PyTorch>=1.0
 ## Install
 
 ```
-pip install git+https://github.com/kamo-naoyuki/pytorch_complex
+pip install torch_complex
 ```
 
 ## How to use
