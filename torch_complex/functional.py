@@ -7,6 +7,10 @@ import torch
 from torch.nn import functional as F
 
 from torch_complex.tensor import ComplexTensor
+from torch_complex.utils import complex_matrix2real_matrix
+from torch_complex.utils import complex_vector2real_vector
+from torch_complex.utils import real_matrix2complex_matrix
+from torch_complex.utils import real_vector2complex_vector
 
 
 def _fcomplex(func, nthargs=0):
@@ -168,3 +172,11 @@ def matmul(a: Union[ComplexTensor, torch.Tensor],
         o_real = torch.matmul(a.real, b.real)
         o_imag = torch.zeros_like(o_real)
     return ComplexTensor(o_real, o_imag)
+
+
+def solve(b: ComplexTensor, a: ComplexTensor) -> ComplexTensor:
+    """Solve ax = b"""
+    a = complex_matrix2real_matrix(a)
+    b = complex_vector2real_vector(b)
+    x, LU = torch.solve(b, a)
+    return real_vector2complex_vector(x), real_matrix2complex_matrix(LU)

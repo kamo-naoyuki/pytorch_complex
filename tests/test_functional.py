@@ -35,3 +35,16 @@ def test_trace():
     x = numpy.trace(t.numpy())
     y = F.trace(t).numpy()
     numpy.testing.assert_allclose(x, y)
+
+
+def test_solve():
+    t = ComplexTensor(_get_complex_array(1, 10, 10))
+    s = ComplexTensor(_get_complex_array(1, 10, 4))
+    x, _ = F.solve(s, t)
+    y = t @ x
+    numpy.testing.assert_allclose(
+        y.real.numpy()[0], s.real.numpy()[0], atol=1e-14,
+    )
+    numpy.testing.assert_allclose(
+        y.imag.numpy()[0], s.imag.numpy()[0], atol=1e-14,
+    )

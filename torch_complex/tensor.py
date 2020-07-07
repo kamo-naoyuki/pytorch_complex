@@ -359,7 +359,7 @@ class ComplexTensor:
         return ComplexTensor(self.real.index_select(dim, index),
                              self.imag.index_select(dim, index))
 
-    def inverse(self, ntry=5):
+    def inverse(self, ntry=5) -> "ComplexTensor":
         # m x n x n
         in_size = self.size()
         a = self.view(-1, self.size(-1), self.size(-1))
@@ -390,6 +390,13 @@ class ComplexTensor:
 
             o = ComplexTensor(o_real, o_imag)
             return o.view(*in_size)
+
+    def inverse2(self) -> "ComplexTensor":
+        # To avoid cyclic import
+        from torch_complex.utils import complex_matrix2real_matrix
+        from torch_complex.utils import real_matrix2complex_matrix
+
+        return real_matrix2complex_matrix(complex_matrix2real_matrix(self).inverse())
 
     def item(self) -> numbers.Number:
         return self.real.item() + 1j * self.imag.item()
