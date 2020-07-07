@@ -97,8 +97,8 @@ def test_mean():
 def test_inverse():
     t = ComplexTensor(_get_complex_array(1, 10, 10))
     x = t @ t.inverse()
-    numpy.testing.assert_allclose(x.real.numpy()[0], numpy.eye(10), atol=1e-14)
-    numpy.testing.assert_allclose(x.imag.numpy()[0], numpy.zeros((10, 10)), atol=1e-14)
+    numpy.testing.assert_allclose(x.real.numpy()[0], numpy.eye(10), atol=1e-13)
+    numpy.testing.assert_allclose(x.imag.numpy()[0], numpy.zeros((10, 10)), atol=1e-13)
 
 
 def test_inverse2():
