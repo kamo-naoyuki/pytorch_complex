@@ -1,6 +1,9 @@
+from distutils.version import LooseVersion
+
 import numpy
 import pytest
 
+import torch
 import torch_complex.functional as F
 from torch_complex.tensor import ComplexTensor
 
@@ -43,14 +46,17 @@ def test_trace():
     numpy.testing.assert_allclose(x, y)
 
 
+@pytest.mark.skipif(
+    LooseVersion(torch.__version__) <= LooseVersion("1.0"), reason="requires torch>=1.1"
+)
 def test_solve():
     t = ComplexTensor(_get_complex_array(1, 10, 10))
     s = ComplexTensor(_get_complex_array(1, 10, 4))
     x, _ = F.solve(s, t)
     y = t @ x
     numpy.testing.assert_allclose(
-        y.real.numpy()[0], s.real.numpy()[0], atol=1e-14,
+        y.real.numpy()[0], s.real.numpy()[0], atol=1e-13,
     )
     numpy.testing.assert_allclose(
-        y.imag.numpy()[0], s.imag.numpy()[0], atol=1e-14,
+        y.imag.numpy()[0], s.imag.numpy()[0], atol=1e-13,
     )
