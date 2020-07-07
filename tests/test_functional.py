@@ -9,11 +9,17 @@ def _get_complex_array(*shape):
     return numpy.random.randn(*shape) + 1j + numpy.random.randn(*shape)
 
 
-@pytest.mark.parametrize('nop,top',
-                         [(numpy.concatenate, F.cat),
-                          (numpy.stack, F.stack),
-                          (lambda x: numpy.einsum('ai,ij,jk->ak', *x),
-                           lambda x: F.einsum('ai,ij,jk->ak', x))])
+@pytest.mark.parametrize(
+    "nop,top",
+    [
+        (numpy.concatenate, F.cat),
+        (numpy.stack, F.stack),
+        (
+            lambda x: numpy.einsum("ai,ij,jk->ak", *x),
+            lambda x: F.einsum("ai,ij,jk->ak", x),
+        ),
+    ],
+)
 def test_operation(nop, top):
     if top is None:
         top = nop
