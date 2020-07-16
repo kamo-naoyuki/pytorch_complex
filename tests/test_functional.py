@@ -47,7 +47,7 @@ def test_trace():
 
 
 @pytest.mark.skipif(
-    LooseVersion(torch.__version__) <= LooseVersion("1.0"), reason="requires torch>=1.1"
+    LooseVersion(torch.__version__) < LooseVersion("1.1"), reason="requires torch>=1.1"
 )
 def test_solve():
     t = ComplexTensor(_get_complex_array(1, 10, 10))
