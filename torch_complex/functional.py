@@ -29,7 +29,7 @@ def _fcomplex(func, nthargs=0):
     return wrapper
 
 
-def einsum(equation, operands):
+def einsum(equation, *operands):
     """Einsum
 
     >>> import numpy
@@ -46,6 +46,9 @@ def einsum(equation, operands):
     >>> numpy.testing.assert_allclose(test.numpy(), valid)
 
     """
+    if len(operands) == 1 and isinstance(operands, (tuple, list)):
+        operands = operands[0]
+
     x = operands[0]
     if isinstance(x, ComplexTensor):
         real_operands = [[x.real]]
@@ -71,35 +74,50 @@ def einsum(equation, operands):
     return ComplexTensor(real, imag)
 
 
-def cat(seq: Sequence[Union[ComplexTensor, torch.Tensor]], dim=0, out=None):
+def cat(seq: Sequence[Union[ComplexTensor, torch.Tensor]], *args, **kwargs):
+    """
+    cat(seq, dim=0, *, out=None)
+    cat(seq, axis=0, *, out=None)
+    """
     reals = [v.real if isinstance(v, ComplexTensor) else v for v in seq]
     imags = [
         v.imag if isinstance(v, ComplexTensor) else torch.zeros_like(v.real)
         for v in seq
     ]
+    out = kwargs.pop("out", None)
     if out is not None:
+        out = out
         out_real = out.real
         out_imag = out.imag
     else:
         out_real = out_imag = None
     return ComplexTensor(
-        torch.cat(reals, dim, out=out_real), torch.cat(imags, dim, out=out_imag)
+        torch.cat(reals, *args, out=out_real, **kwargs),
+        torch.cat(imags, *args, out=out_imag, **kwargs),
     )
 
 
-def stack(seq: Sequence[Union[ComplexTensor, torch.Tensor]], dim=0, out=None):
+def stack(seq: Sequence[Union[ComplexTensor, torch.Tensor]], *args, **kwargs):
+    """
+    stack(tensors, dim=0, * out=None)
+    stack(tensors, axis=0, * out=None)
+
+    """
     reals = [v.real if isinstance(v, ComplexTensor) else v for v in seq]
     imags = [
         v.imag if isinstance(v, ComplexTensor) else torch.zeros_like(v.real)
         for v in seq
     ]
+
+    out = kwargs.pop("out", None)
     if out is not None:
         out_real = out.real
         out_imag = out.imag
     else:
         out_real = out_imag = None
     return ComplexTensor(
-        torch.stack(reals, dim, out=out_real), torch.stack(imags, dim, out=out_imag)
+        torch.stack(reals, *args, out=out_real, **kwargs),
+        torch.stack(imags, *args, out=out_imag, **kwargs),
     )
 
 
@@ -144,7 +162,7 @@ def trace(a: ComplexTensor) -> ComplexTensor:
         datatype = torch.bool
     else:
         datatype = torch.uint8
-    E = torch.eye(a.real.size(-1), dtype=datatype).expand(*a.size())
+    E = torch.eye(a.shape[-1], dtype=datatype).expand(*a.size())
     if LooseVersion(torch.__version__) >= LooseVersion("1.1"):
         E = E.type(torch.bool)
     return a[E].view(*a.size()[:-1]).sum(-1)

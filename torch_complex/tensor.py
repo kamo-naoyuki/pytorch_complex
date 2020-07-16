@@ -598,8 +598,20 @@ class ComplexTensor:
         return ComplexTensor(self.real.squeeze(dim), self.imag.squeeze(dim))
 
     def sum(self, *args, **kwargs) -> "ComplexTensor":
+        """
+        sum(self, dim, keepdim, *, dtype=None)
+        sum(self, axis, keepdims, *, dtype=None)  # numpy style
+
+        Args:
+            dim or axis:
+            keepdim or keepdims:
+            **kwargs:
+
+        Returns:
+
+        """
         return ComplexTensor(
-            self.real.sum(*args, **kwargs), self.imag.sum(*args, **kwargs),
+            self.real.sum(*args, **kwargs), self.imag.sum(*args, **kwargs)
         )
 
     def take(self, indices) -> "ComplexTensor":
