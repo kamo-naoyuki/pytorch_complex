@@ -46,7 +46,7 @@ def einsum(equation, *operands):
     >>> numpy.testing.assert_allclose(test.numpy(), valid)
 
     """
-    if len(operands) == 1 and isinstance(operands, (tuple, list)):
+    if len(operands) == 1:
         operands = operands[0]
 
     x = operands[0]
