@@ -1,5 +1,8 @@
 # pytorch_complex
 
+[![PyPI version](https://badge.fury.io/py/torch-complex.svg)](https://badge.fury.io/py/torch-complex)
+[![Python Versions](https://img.shields.io/pypi/pyversions/torch-complex.svg)](https://pypi.org/project/torch-complex/)
+[![Downloads](https://pepy.tech/badge/torch-complex)](https://pepy.tech/project/torch-complex)
 [![Build Status](https://travis-ci.org/kamo-naoyuki/pytorch_complex.svg?branch=master)](https://travis-ci.org/kamo-naoyuki/pytorch_complex)
 [![codecov](https://codecov.io/gh/kamo-naoyuki/pytorch_complex/branch/master/graph/badge.svg)](https://codecov.io/gh/kamo-naoyuki/pytorch_complex)
 
