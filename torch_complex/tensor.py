@@ -205,12 +205,15 @@ class ComplexTensor:
         return len(self.real)
 
     def __repr__(self) -> str:
+        import textwrap
+
         return (
-            "ComplexTensor(\nReal:\n"
-            + repr(self.real)
-            + "\nImag:\n"
-            + repr(self.imag)
-            + "\n)"
+            "ComplexTensor("
+            + "\n    real="
+            + textwrap.indent(repr(self.real), " " * len("    real=")).lstrip(" ")
+            + ",\n    imag="
+            + textwrap.indent(repr(self.imag), " " * len("    imag=")).lstrip(" ")
+            + ",\n)"
         )
 
     def __abs__(self) -> torch.Tensor:
@@ -532,8 +535,16 @@ class ComplexTensor:
     def numpy(self) -> numpy.ndarray:
         return self.real.numpy() + 1j * self.imag.numpy()
 
+    def __array__(self):
+        # https://numpy.org/devdocs/user/basics.dispatch.html
+        return self.real.__array__() + 1j * self.imag.__array__()
+
     def permute(self, *dims) -> "ComplexTensor":
         return ComplexTensor(self.real.permute(*dims), self.imag.permute(*dims))
+
+    @property
+    def T(self):
+        return ComplexTensor(self.real.T, self.imag.T)
 
     def pow(self, exponent) -> "ComplexTensor":
         return self ** exponent
@@ -573,6 +584,13 @@ class ComplexTensor:
     def size(self, *args, **kwargs) -> torch.Size:
         return self.real.size(*args, **kwargs)
 
+    def ndimension(self):
+        return self.real.ndimension()
+
+    @property
+    def ndim(self):
+        return self.real.ndim
+
     def sqrt(self) -> "ComplexTensor":
         return self ** 0.5
 
@@ -580,8 +598,20 @@ class ComplexTensor:
         return ComplexTensor(self.real.squeeze(dim), self.imag.squeeze(dim))
 
     def sum(self, *args, **kwargs) -> "ComplexTensor":
+        """
+        sum(self, dim, keepdim, *, dtype=None)
+        sum(self, axis, keepdims, *, dtype=None)  # numpy style
+
+        Args:
+            dim or axis:
+            keepdim or keepdims:
+            **kwargs:
+
+        Returns:
+
+        """
         return ComplexTensor(
-            self.real.sum(*args, **kwargs), self.imag.sum(*args, **kwargs),
+            self.real.sum(*args, **kwargs), self.imag.sum(*args, **kwargs)
         )
 
     def take(self, indices) -> "ComplexTensor":
