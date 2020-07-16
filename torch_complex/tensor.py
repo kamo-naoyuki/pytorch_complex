@@ -205,12 +205,15 @@ class ComplexTensor:
         return len(self.real)
 
     def __repr__(self) -> str:
+        import textwrap
+
         return (
-            "ComplexTensor(\nReal:\n"
-            + repr(self.real)
-            + "\nImag:\n"
-            + repr(self.imag)
-            + "\n)"
+            "ComplexTensor("
+            + "\n    real="
+            + textwrap.indent(repr(self.real), " " * len("    real=")).lstrip(" ")
+            + ",\n    imag="
+            + textwrap.indent(repr(self.imag), " " * len("    imag=")).lstrip(" ")
+            + ",\n)"
         )
 
     def __abs__(self) -> torch.Tensor:
