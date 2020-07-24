@@ -635,8 +635,13 @@ class ComplexTensor:
         self.imag.transpose_(dim0, dim1)
         return self
 
-    def type(self) -> str:
-        return self.real.type()
+    def type(self, *args, **kwargs) -> str:
+        if len(args) == 0 and len(kwargs) == 0:
+            return self.real.type()
+        else:
+            return ComplexTensor(
+                self.real.type(*args, **kwargs), self.imag.type(*args, **kwargs)
+            )
 
     def unfold(self, dim, size, step):
         return ComplexTensor(
