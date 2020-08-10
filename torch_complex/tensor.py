@@ -14,6 +14,9 @@ class ComplexTensor:
                     real = real.real
                 else:
                     imag = numpy.zeros_like(real)
+            elif isinstance(real, ComplexTensor):
+                imag = real.imag
+                real = real.real
             else:
                 imag = torch.zeros_like(real)
 
