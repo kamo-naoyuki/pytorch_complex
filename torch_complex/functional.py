@@ -44,9 +44,11 @@ def einsum(equation, *operands):
     ...               [ComplexTensor(x), ComplexTensor(y), ComplexTensor(z)])
     >>> valid = numpy.einsum('aij,ajk,akl->ail', x, y, z)
     >>> numpy.testing.assert_allclose(test.numpy(), valid)
+    >>> _ = einsum('aij->ai', ComplexTensor(x))
+    >>> _ = einsum('aij->ai', [ComplexTensor(x)])
 
     """
-    if len(operands) == 1:
+    if len(operands) == 1 and isinstance(operands[0], (tuple, list)):
         operands = operands[0]
 
     x = operands[0]
