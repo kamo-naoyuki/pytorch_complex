@@ -316,7 +316,17 @@ class ComplexTensor:
 
     @property
     def dtype(self) -> torch.dtype:
+        # Warning: Try to never use this dtype property.
+        #          It will break your code, when you change to the native
+        #          complex type.
+        #          Use instead directly `complex_tensor.real.dtype`.
         return self.real.dtype
+
+    def is_floating_point(self):
+        return False
+    
+    def is_complex(self):
+        return True
 
     def eq(self, other) -> torch.Tensor:
         if isinstance(other, (ComplexTensor, complex)):
