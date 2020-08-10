@@ -122,7 +122,7 @@ def stack(seq: Sequence[Union[ComplexTensor, torch.Tensor]], *args, **kwargs):
 
 
 pad = _fcomplex(F.pad)
-
+squeeze = _fcomplex(torch.squeeze)
 
 @_fcomplex
 def reverse(tensor: torch.Tensor, dim=0) -> torch.Tensor:
