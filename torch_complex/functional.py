@@ -44,9 +44,11 @@ def einsum(equation, *operands):
     ...               [ComplexTensor(x), ComplexTensor(y), ComplexTensor(z)])
     >>> valid = numpy.einsum('aij,ajk,akl->ail', x, y, z)
     >>> numpy.testing.assert_allclose(test.numpy(), valid)
+    >>> _ = einsum('aij->ai', ComplexTensor(x))
+    >>> _ = einsum('aij->ai', [ComplexTensor(x)])
 
     """
-    if len(operands) == 1:
+    if len(operands) == 1 and isinstance(operands[0], (tuple, list)):
         operands = operands[0]
 
     x = operands[0]
@@ -122,7 +124,7 @@ def stack(seq: Sequence[Union[ComplexTensor, torch.Tensor]], *args, **kwargs):
 
 
 pad = _fcomplex(F.pad)
-
+squeeze = _fcomplex(torch.squeeze)
 
 @_fcomplex
 def reverse(tensor: torch.Tensor, dim=0) -> torch.Tensor:
