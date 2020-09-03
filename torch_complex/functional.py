@@ -13,6 +13,20 @@ from torch_complex.utils import real_matrix2complex_matrix
 from torch_complex.utils import real_vector2complex_vector
 
 
+__all__ = [
+    'einsum',
+    'cat',
+    'stack',
+    'pad',
+    'squeeze',
+    'reverse',
+    'trace',
+    'allclose',
+    'matmul',
+    'solve',
+]
+
+
 def _fcomplex(func, nthargs=0):
     @functools.wraps(func)
     def wrapper(*args, **kwargs) -> Union[ComplexTensor, torch.Tensor]:
