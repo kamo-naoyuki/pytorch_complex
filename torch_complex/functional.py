@@ -14,16 +14,16 @@ from torch_complex.utils import real_vector2complex_vector
 
 
 __all__ = [
-    'einsum',
-    'cat',
-    'stack',
-    'pad',
-    'squeeze',
-    'reverse',
-    'trace',
-    'allclose',
-    'matmul',
-    'solve',
+    "einsum",
+    "cat",
+    "stack",
+    "pad",
+    "squeeze",
+    "reverse",
+    "trace",
+    "allclose",
+    "matmul",
+    "solve",
 ]
 
 
@@ -139,6 +139,7 @@ def stack(seq: Sequence[Union[ComplexTensor, torch.Tensor]], *args, **kwargs):
 
 pad = _fcomplex(F.pad)
 squeeze = _fcomplex(torch.squeeze)
+
 
 @_fcomplex
 def reverse(tensor: torch.Tensor, dim=0) -> torch.Tensor:

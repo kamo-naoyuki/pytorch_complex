@@ -5,13 +5,13 @@ import numpy
 import torch
 
 
-__all__ = [
-    'ComplexTensor'
-]
+__all__ = ["ComplexTensor"]
 
 
 class ComplexTensor:
-    def __init__(self, real: Union[torch.Tensor, numpy.ndarray], imag=None, device=None):
+    def __init__(
+        self, real: Union[torch.Tensor, numpy.ndarray], imag=None, device=None
+    ):
         if imag is None:
             if isinstance(real, numpy.ndarray):
                 if real.dtype.kind == "c":
@@ -333,7 +333,7 @@ class ComplexTensor:
 
     def is_floating_point(self):
         return False
-    
+
     def is_complex(self):
         return True
 
