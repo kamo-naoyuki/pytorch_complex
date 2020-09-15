@@ -5,8 +5,13 @@ import numpy
 import torch
 
 
+__all__ = [
+    'ComplexTensor'
+]
+
+
 class ComplexTensor:
-    def __init__(self, real: Union[torch.Tensor, numpy.ndarray], imag=None):
+    def __init__(self, real: Union[torch.Tensor, numpy.ndarray], imag=None, device=None):
         if imag is None:
             if isinstance(real, numpy.ndarray):
                 if real.dtype.kind == "c":
@@ -18,12 +23,16 @@ class ComplexTensor:
                 imag = real.imag
                 real = real.real
             else:
-                imag = torch.zeros_like(real)
+                imag = torch.zeros_like(real, device=device)
 
         if isinstance(real, numpy.ndarray):
-            real = torch.from_numpy(real)
+            real = torch.as_tensor(real, device=device)
+        else:
+            real = real.to(device)
         if isinstance(imag, numpy.ndarray):
-            imag = torch.from_numpy(imag)
+            imag = torch.as_tensor(imag, device=device)
+        else:
+            imag = imag.to(device)
 
         if not torch.is_tensor(real):
             raise TypeError(
@@ -579,6 +588,9 @@ class ComplexTensor:
 
     def repeat(self, *sizes):
         return ComplexTensor(self.real.repeat(*sizes), self.imag.repeat(*sizes))
+
+    def reshape(self, shape):
+        return ComplexTensor(self.real.reshape(shape), self.imag.reshape(shape))
 
     def retain_grad(self) -> "ComplexTensor":
         self.real.retain_grad()
