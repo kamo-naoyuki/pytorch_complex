@@ -589,8 +589,8 @@ class ComplexTensor:
     def repeat(self, *sizes):
         return ComplexTensor(self.real.repeat(*sizes), self.imag.repeat(*sizes))
 
-    def reshape(self, shape):
-        return ComplexTensor(self.real.reshape(shape), self.imag.reshape(shape))
+    def reshape(self, *shape):
+        return ComplexTensor(self.real.reshape(*shape), self.imag.reshape(*shape))
 
     def retain_grad(self) -> "ComplexTensor":
         self.real.retain_grad()
