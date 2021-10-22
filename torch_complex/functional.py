@@ -218,6 +218,7 @@ def matmul(
     if isinstance(a, ComplexTensor) and isinstance(b, ComplexTensor):
         return a @ b
     elif not isinstance(a, ComplexTensor) and isinstance(b, ComplexTensor):
+        o_real = torch.matmul(a, b.real)
         o_imag = torch.matmul(a, b.imag)
     elif isinstance(a, ComplexTensor) and not isinstance(b, ComplexTensor):
         return a @ b
