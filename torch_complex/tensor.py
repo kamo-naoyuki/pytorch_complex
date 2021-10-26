@@ -619,8 +619,11 @@ class ComplexTensor:
     def sqrt(self) -> "ComplexTensor":
         return self ** 0.5
 
-    def squeeze(self, dim) -> "ComplexTensor":
-        return ComplexTensor(self.real.squeeze(dim), self.imag.squeeze(dim))
+    def squeeze(self, dim=None) -> "ComplexTensor":
+        if dim is None:
+            return ComplexTensor(self.real.squeeze(), self.imag.squeeze())
+        else:
+            return ComplexTensor(self.real.squeeze(dim), self.imag.squeeze(dim))
 
     def sum(self, *args, **kwargs) -> "ComplexTensor":
         """
@@ -667,6 +670,14 @@ class ComplexTensor:
             return ComplexTensor(
                 self.real.type(*args, **kwargs), self.imag.type(*args, **kwargs)
             )
+
+    def unbind(self, dim=0) -> "ComplexTensor":
+        return tuple(
+            map(
+                lambda x: ComplexTensor(*x),
+                zip(self.real.unbind(dim=dim), self.imag.unbind(dim=dim))
+            )
+        )
 
     def unfold(self, dim, size, step):
         return ComplexTensor(
