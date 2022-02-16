@@ -232,5 +232,9 @@ def solve(b: ComplexTensor, a: ComplexTensor) -> ComplexTensor:
     """Solve ax = b"""
     a = complex_matrix2real_matrix(a)
     b = complex_vector2real_vector(b)
-    x, LU = torch.solve(b, a)
+    if LooseVersion(torch.__version__) >= LooseVersion("1.8"):
+        a_LU = torch.lu(a)
+        x = torch.lu_solve(b, *a_LU)
+    else:
+        x, LU = torch.solve(b, a)
     return real_vector2complex_vector(x), real_matrix2complex_matrix(LU)
