@@ -209,9 +209,9 @@ class ComplexTensor:
 
     def __eq__(self, other) -> torch.Tensor:
         if isinstance(other, (ComplexTensor, complex)):
-            return (self.real == other.real) ** (self.imag == other.imag)
+            return (self.real == other.real) and (self.imag == other.imag)
         else:
-            return (self.real == other) ** (self.imag == 0)
+            return (self.real == other) and (self.imag == 0)
 
     def __len__(self) -> int:
         return len(self.real)
