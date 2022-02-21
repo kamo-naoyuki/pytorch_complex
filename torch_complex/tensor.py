@@ -99,7 +99,7 @@ class ComplexTensor:
 
     def __truediv__(self, other) -> "ComplexTensor":
         if isinstance(other, (ComplexTensor, complex)):
-            den = other.real ** 2 + other.imag ** 2
+            den = other.real**2 + other.imag**2
             return ComplexTensor(
                 (self.real * other.real + self.imag * other.imag) / den,
                 (-self.real * other.imag + self.imag * other.real) / den,
@@ -109,13 +109,13 @@ class ComplexTensor:
 
     def __rtruediv__(self, other) -> "ComplexTensor":
         if isinstance(other, (ComplexTensor, complex)):
-            den = self.real ** 2 + self.imag ** 2
+            den = self.real**2 + self.imag**2
             return ComplexTensor(
                 (other.real * self.real + other.imag * self.imag) / den,
                 (-other.real * self.imag + other.imag * self.real) / den,
             )
         else:
-            den = self.real ** 2 + self.imag ** 2
+            den = self.real**2 + self.imag**2
             return ComplexTensor(other * self.real / den, -other * self.imag / den)
 
     def __itruediv__(self, other) -> "ComplexTensor":
@@ -248,7 +248,7 @@ class ComplexTensor:
         return ComplexTensor(_abs * torch.cos(_angle), _abs * torch.sin(_angle))
 
     def __ipow__(self, exponent) -> "ComplexTensor":
-        c = self ** exponent
+        c = self**exponent
         self.real = c.real
         self.imag = c.imag
         return self
@@ -311,11 +311,16 @@ class ComplexTensor:
         assert self.real.device == self.imag.device
         return self.real.device
 
-    def diag(self) -> "ComplexTensor":
-        return ComplexTensor(self.real.diag(), self.imag.diag())
+    def diag(self, diagonal=0) -> "ComplexTensor":
+        return ComplexTensor(
+            self.real.diag(diagonal=diagonal), self.imag.diag(diagonal=diagonal)
+        )
 
-    def diagonal(self) -> "ComplexTensor":
-        return ComplexTensor(self.real.diag(), self.imag.diag())
+    def diagonal(self, offset=0, dim1=0, dim2=1) -> "ComplexTensor":
+        return ComplexTensor(
+            self.real.diagonal(offset=offset, dim1=dim1, dim2=dim2),
+            self.imag.diagonal(offset=offset, dim1=dim1, dim2=dim2),
+        )
 
     def dim(self) -> int:
         return self.real.dim()
@@ -569,7 +574,7 @@ class ComplexTensor:
         return ComplexTensor(self.real.T, self.imag.T)
 
     def pow(self, exponent) -> "ComplexTensor":
-        return self ** exponent
+        return self**exponent
 
     def requires_grad_(self) -> "ComplexTensor":
         self.real.requires_grad_()
@@ -617,7 +622,7 @@ class ComplexTensor:
         return self.real.ndim
 
     def sqrt(self) -> "ComplexTensor":
-        return self ** 0.5
+        return self**0.5
 
     def squeeze(self, dim=None) -> "ComplexTensor":
         if dim is None:
@@ -675,7 +680,7 @@ class ComplexTensor:
         return tuple(
             map(
                 lambda x: ComplexTensor(*x),
-                zip(self.real.unbind(dim=dim), self.imag.unbind(dim=dim))
+                zip(self.real.unbind(dim=dim), self.imag.unbind(dim=dim)),
             )
         )
 
