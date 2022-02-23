@@ -228,13 +228,20 @@ def matmul(
     return ComplexTensor(o_real, o_imag)
 
 
-def solve(b: ComplexTensor, a: ComplexTensor) -> ComplexTensor:
+def solve(b: ComplexTensor, a: ComplexTensor, return_LU=False) -> ComplexTensor:
     """Solve ax = b"""
     a = complex_matrix2real_matrix(a)
     b = complex_vector2real_vector(b)
     if LooseVersion(torch.__version__) >= LooseVersion("1.8"):
-        LU, pivots = torch.lu(a)
-        x = torch.lu_solve(b, LU, pivots)
+        if return_LU:
+            LU, pivots = torch.lu(a)
+            x = torch.lu_solve(b, LU, pivots)
+        else:
+            x = torch.linalg.solve(a, b)
     else:
         x, LU = torch.solve(b, a)
-    return real_vector2complex_vector(x), real_matrix2complex_matrix(LU)
+    if return_LU:
+        return real_vector2complex_vector(x), real_matrix2complex_matrix(LU)
+    else:
+        return real_vector2complex_vector(x)
+
