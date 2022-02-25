@@ -5,7 +5,7 @@ from setuptools import setup
 
 dirname = os.path.dirname(__file__)
 setup(name='torch_complex',
-      version='0.4.0',
+      version='0.4.',
       description='A fugacious python class for PyTorch-ComplexTensor',
       long_description=open(os.path.join(dirname, 'README.md'),
                             encoding='utf-8').read(),
