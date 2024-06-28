@@ -1,9 +1,9 @@
-from distutils.version import LooseVersion
 import functools
 from typing import Sequence
 from typing import Union
 
 import torch
+from packaging.version import parse as V
 from torch.nn import functional as F
 
 from torch_complex.tensor import ComplexTensor
@@ -175,12 +175,12 @@ def signal_frame(
 
 
 def trace(a: ComplexTensor) -> ComplexTensor:
-    if LooseVersion(torch.__version__) >= LooseVersion("1.3"):
+    if V(torch.__version__) >= V("1.3"):
         datatype = torch.bool
     else:
         datatype = torch.uint8
     E = torch.eye(a.shape[-1], dtype=datatype).expand(*a.size())
-    if LooseVersion(torch.__version__) >= LooseVersion("1.1"):
+    if V(torch.__version__) >= V("1.1"):
         E = E.type(torch.bool)
     return a[E].view(*a.size()[:-1]).sum(-1)
 
@@ -232,7 +232,7 @@ def solve(b: ComplexTensor, a: ComplexTensor, return_LU=False) -> ComplexTensor:
     """Solve ax = b"""
     a = complex_matrix2real_matrix(a)
     b = complex_vector2real_vector(b)
-    if LooseVersion(torch.__version__) >= LooseVersion("1.8"):
+    if V(torch.__version__) >= V("1.8"):
         if return_LU:
             LU, pivots = torch.lu(a)
             x = torch.lu_solve(b, LU, pivots)

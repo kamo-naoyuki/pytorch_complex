@@ -14,7 +14,7 @@ setup(name='torch_complex',
       author_email='naoyuki.kamo829@gmail.com',
       url='https://github.com/kamo-naoyuki/torch_complex',
       packages=find_packages(include=['torch_complex']),
-      install_requires=['numpy'],
+      install_requires=['packaging', 'numpy'],
       setup_requires=['pytest-runner'],
       tests_require=['pytest', 'pytest-cov'],
       classifiers=[
