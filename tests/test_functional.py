@@ -1,9 +1,8 @@
-from distutils.version import LooseVersion
-
 import numpy
 import pytest
 
 import torch
+from packaging.version import parse as V
 import torch_complex.functional as F
 from torch_complex.tensor import ComplexTensor
 
@@ -47,7 +46,7 @@ def test_trace():
 
 
 @pytest.mark.skipif(
-    LooseVersion(torch.__version__) < LooseVersion("1.1"), reason="requires torch>=1.1"
+    V(torch.__version__) < V("1.1"), reason="requires torch>=1.1"
 )
 def test_solve():
     t = ComplexTensor(_get_complex_array(1, 10, 10))
